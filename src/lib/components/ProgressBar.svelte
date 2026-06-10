@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { t, fmt } from '$lib/i18n';
-
 	interface Props {
 		current: number;
 		total: number;
@@ -13,8 +11,8 @@
 
 <div class="space-y-2">
 	<div class="flex justify-between text-sm text-gray-600">
-		<span>{fmt($t.progressBar.questionOf, { n: questionNumber, total })}</span>
-		<span>{fmt($t.progressBar.answeredPct, { n: current, pct: Math.round(percentage) })}</span>
+		<span>Question {questionNumber} of {total}</span>
+		<span>{current} answered • {Math.round(percentage)}%</span>
 	</div>
 	<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
 		<div

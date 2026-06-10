@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { t } from '$lib/i18n';
-
 	interface Props {
 		code: string;
 	}
@@ -23,7 +21,6 @@
 				document.body.appendChild(textArea);
 				textArea.focus();
 				textArea.select();
-
 				try {
 					document.execCommand('copy');
 					copied = true;
@@ -47,7 +44,7 @@
 </script>
 
 <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100">
-	<h3 class="text-lg font-semibold mb-3 text-gray-800">{$t.shareCode.heading}</h3>
+	<h3 class="text-lg font-semibold mb-3 text-gray-800">Share this code with your partner</h3>
 	<div class="flex gap-3">
 		<input
 			type="text"
@@ -59,10 +56,10 @@
 			onclick={copyToClipboard}
 			class="px-6 py-3 {copied ? 'bg-green-500' : 'bg-purple-600'} text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200"
 		>
-			{copied ? $t.shareCode.copied : $t.shareCode.copy}
+			{copied ? '✓ Copied!' : 'Copy'}
 		</button>
 	</div>
 	<p class="text-sm text-gray-600 mt-3">
-		{$t.shareCode.helpText}
+		They'll enter this code to answer the questions, then you'll both see your matches!
 	</p>
 </div>

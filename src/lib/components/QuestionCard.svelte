@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Question, ResponseType } from '$lib/types';
-	import { t } from '$lib/i18n';
 
 	interface Props {
 		question: Question;
@@ -28,7 +27,7 @@
 				? 'bg-green-500 text-white shadow-lg scale-105'
 				: 'bg-green-100 text-green-700 hover:bg-green-200 hover:shadow-md'}"
 		>
-			{$t.questionCard.yes}
+			Yes
 		</button>
 		<button
 			onclick={() => onAnswer('maybe')}
@@ -36,7 +35,7 @@
 				? 'bg-yellow-500 text-white shadow-lg scale-105'
 				: 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200 hover:shadow-md'}"
 		>
-			{$t.questionCard.maybe}
+			Maybe
 		</button>
 		<button
 			onclick={() => onAnswer('no')}
@@ -44,7 +43,7 @@
 				? 'bg-red-500 text-white shadow-lg scale-105'
 				: 'bg-red-100 text-red-700 hover:bg-red-200 hover:shadow-md'}"
 		>
-			{$t.questionCard.no}
+			No
 		</button>
 	</div>
 </div>

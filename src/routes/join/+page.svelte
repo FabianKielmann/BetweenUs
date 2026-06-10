@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import { decodeShareCode } from '$lib/utils/encoding';
 	import { createSession, savePartnerData, savePartnerCodeToSession } from '$lib/utils/session';
-	import { t } from '$lib/i18n';
 
 	let code = $state('');
 	let error = $state('');
@@ -11,13 +10,13 @@
 		error = '';
 
 		if (!code.trim()) {
-			error = $t.join.errorEmpty;
+			error = 'Please enter a code';
 			return;
 		}
 
 		const decoded = decodeShareCode(code.trim());
 		if (!decoded) {
-			error = $t.join.errorInvalid;
+			error = 'Invalid code. Please check and try again.';
 			return;
 		}
 
@@ -32,23 +31,21 @@
 	<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100 space-y-6">
 		<div class="text-center space-y-2">
 			<h1 class="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-				{$t.join.title}
+				Join Your Partner
 			</h1>
-			<p class="text-gray-700">
-				{$t.join.subtitle}
-			</p>
+			<p class="text-gray-700">Enter the code your partner shared with you</p>
 		</div>
 
 		<form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="space-y-4">
 			<div>
 				<label for="code" class="block text-sm font-medium text-gray-700 mb-2">
-					{$t.join.codeLabel}
+					Partner's Code
 				</label>
 				<input
 					id="code"
 					type="text"
 					bind:value={code}
-					placeholder={$t.join.codePlaceholder}
+					placeholder="Enter code here..."
 					class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent font-mono"
 					autocomplete="off"
 				/>
@@ -61,7 +58,7 @@
 				type="submit"
 				class="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
 			>
-				{$t.join.submit}
+				Continue to Questions
 			</button>
 		</form>
 
@@ -70,7 +67,7 @@
 				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
 				</svg>
-				{$t.join.backHome}
+				Back to home
 			</a>
 		</div>
 	</div>
@@ -81,13 +78,13 @@
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 			</svg>
 			<div class="text-sm text-blue-800">
-				<p class="font-semibold mb-1">{$t.join.whatNextTitle}</p>
+				<p class="font-semibold mb-1">What happens next?</p>
 				<ul class="space-y-1 list-disc list-inside">
-					<li>{$t.join.whatNextItem1}</li>
-					<li>{$t.join.whatNextItem2}</li>
-					<li>{$t.join.whatNextItem3}</li>
+					<li>You'll answer the same questions</li>
+					<li>You'll get YOUR own code to share back</li>
+					<li>Once you both exchange codes, you'll see mutual matches</li>
 				</ul>
-				<p class="mt-2 font-semibold">{$t.join.whatNextPrivacy}</p>
+				<p class="mt-2 font-semibold">This two-way exchange ensures complete privacy!</p>
 			</div>
 		</div>
 	</div>
