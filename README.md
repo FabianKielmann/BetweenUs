@@ -19,9 +19,14 @@ The app will be available at `http://localhost:5173` (or your network IP for rem
 
 ## Editing Questions
 
-Questions are stored in **`src/lib/data/questions.json`** for easy editing.
+Questions are stored in `src/lib/data/questions.json`, which is **not committed to git** so you can keep your content private. To get started:
 
-**Format:**
+```bash
+cp src/lib/data/questions.example.json src/lib/data/questions.json
+```
+
+Then edit `questions.json` with your own content. The format is:
+
 ```json
 [
   {
@@ -33,10 +38,10 @@ Questions are stored in **`src/lib/data/questions.json`** for easy editing.
 ```
 
 **Tips:**
-- Keep IDs unique (e.g., `pi_001`, `rf_002`)
+- Keep IDs unique (e.g., `cat1_001`, `cat2_001`)
 - Categories group questions in the results view
 - Questions appear in the order they're listed
-- After editing, just refresh the browser - no rebuild needed
+- After editing, just refresh the browser — no rebuild needed
 
 ## Tech Stack
 
