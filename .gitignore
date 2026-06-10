@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Claude Code (user-specific settings and session data)
+.claude/
+
+# Editor (user-specific preferences)
+.vscode/*
+!.vscode/extensions.json
