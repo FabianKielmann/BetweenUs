@@ -78,7 +78,7 @@
 			<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100">
 				<h1 class="text-3xl font-bold mb-4 text-gray-800">Keine Übereinstimmungen gefunden</h1>
 				<p class="text-gray-700 mb-6">
-					Ihr habt bei keiner Sache beide "Ja" gesagt. Das ist okay! Jeder hat andere Vorlieben.
+					Ihr habt bei keiner Frage beide "Ja" gesagt. Das ist okay! Jeder hat andere Vorlieben.
 				</p>
 				<p class="text-gray-600">Überleg dir, deine Antworten zu überprüfen oder ein offenes Gespräch über eure Wünsche zu führen.</p>
 			</div>
@@ -97,7 +97,7 @@
 					Eure Übereinstimmungen
 				</h1>
 				<p class="text-gray-700">
-					Ihr habt bei {matches.length} {matches.length === 1 ? 'Sache' : 'Sachen'} beide "Ja" gesagt!
+					Ihr habt bei {matches.length} {matches.length === 1 ? 'Frage' : 'Fragen'} beide "Ja" gesagt!
 				</p>
 			</div>
 		</div>
