@@ -1,3 +1,4 @@
+// Copy questions.example.json → questions.json and fill in your own questions
 import type { Question } from '$lib/types';
 import questionsData from './questions.json';
 

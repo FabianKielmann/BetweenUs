@@ -19,6 +19,9 @@ Thumbs.db
 !.env.example
 !.env.test
 
+# Private question content — copy questions.example.json → questions.json
+src/lib/data/questions.json
+
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

@@ -1,0 +1,17 @@
+[
+	{
+		"id": "cat1_001",
+		"category": "Category One",
+		"text": "Example question in category one"
+	},
+	{
+		"id": "cat1_002",
+		"category": "Category One",
+		"text": "Another example question in category one"
+	},
+	{
+		"id": "cat2_001",
+		"category": "Category Two",
+		"text": "Example question in category two"
+	}
+]
