@@ -91,23 +91,23 @@
 				disabled={currentIndex === 0}
 				class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
 			>
-				← Back
+				← Zurück
 			</button>
 			<span class="text-sm text-gray-600 self-center">
-				{answers.length} of {questions.length} answered
+				{answers.length} von {questions.length} beantwortet
 			</span>
 		</div>
 	{:else}
 		<div class="space-y-6">
 			<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100 text-center">
 				<h1 class="text-3xl font-bold mb-4 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-					All Done!
+					Alles erledigt!
 				</h1>
 				<p class="text-gray-700">
 					{#if alreadyHasPartnerCode}
-						You've completed all questions! Ready to see your matches?
+						Du hast alle Fragen beantwortet! Bereit, deine Übereinstimmungen zu sehen?
 					{:else}
-						Now exchange codes with your partner to see your matches.
+						Tauscht jetzt Codes mit deinem Partner aus, um eure Übereinstimmungen zu sehen.
 					{/if}
 				</p>
 			</div>
@@ -118,7 +118,7 @@
 						{#if alreadyHasPartnerCode}✓{:else}1{/if}
 					</div>
 					<div class="flex-1">
-						<h3 class="font-semibold text-blue-900 mb-2">Share YOUR code with your partner</h3>
+						<h3 class="font-semibold text-blue-900 mb-2">Teile DEINEN Code mit deinem Partner</h3>
 						<ShareCode code={shareCode} />
 					</div>
 				</div>
@@ -129,7 +129,7 @@
 					<div class="flex gap-3">
 						<div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold">2</div>
 						<div class="flex-1">
-							<h3 class="font-semibold text-purple-900 mb-3">Get your partner's code and enter it below</h3>
+							<h3 class="font-semibold text-purple-900 mb-3">Hol dir den Code deines Partners und gib ihn unten ein</h3>
 							<PartnerCodeInput onSuccess={handlePartnerCode} />
 						</div>
 					</div>
@@ -137,7 +137,7 @@
 
 				<div class="text-center">
 					<button onclick={goToResults} class="text-sm text-gray-600 hover:text-gray-800 underline">
-						Skip for now, I'll enter it later
+						Jetzt überspringen, ich gebe ihn später ein
 					</button>
 				</div>
 			{:else}
@@ -145,7 +145,7 @@
 					onclick={goToResults}
 					class="w-full max-w-md mx-auto block bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
 				>
-					View Results
+					Ergebnisse anzeigen
 				</button>
 			{/if}
 		</div>

@@ -18,7 +18,7 @@
 
 	<footer class="bg-white/80 backdrop-blur-sm border-t border-pink-200 py-4">
 		<div class="container mx-auto px-4 text-center text-sm text-gray-600">
-			Made with privacy in mind. Your answers are stored locally only.
+			Mit Datenschutz im Sinn entwickelt. Deine Antworten werden nur lokal gespeichert.
 		</div>
 	</footer>
 </div>

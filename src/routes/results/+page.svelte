@@ -54,9 +54,9 @@
 		<div class="text-center space-y-6">
 			<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100">
 				<h1 class="text-3xl font-bold mb-4 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-					Almost There!
+					Fast geschafft!
 				</h1>
-				<p class="text-gray-700 mb-4">Enter your partner's code to see your mutual matches.</p>
+				<p class="text-gray-700 mb-4">Gib den Code deines Partners ein, um eure gemeinsamen Übereinstimmungen zu sehen.</p>
 			</div>
 
 			<PartnerCodeInput onSuccess={handlePartnerCode} />
@@ -67,7 +67,7 @@
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 					</svg>
 					<p class="text-sm text-blue-800">
-						Both of you need to complete the questionnaire and exchange codes. This ensures mutual privacy - no one can see the other's answers until both have committed!
+						Ihr beide müsst den Fragebogen ausfüllen und Codes tauschen. Das gewährleistet gegenseitige Privatsphäre – niemand kann die Antworten des anderen sehen, bis beide zugestimmt haben!
 					</p>
 				</div>
 			</div>
@@ -76,17 +76,17 @@
 	{:else if matches.length === 0}
 		<div class="text-center space-y-6">
 			<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100">
-				<h1 class="text-3xl font-bold mb-4 text-gray-800">No Matches Found</h1>
+				<h1 class="text-3xl font-bold mb-4 text-gray-800">Keine Übereinstimmungen gefunden</h1>
 				<p class="text-gray-700 mb-6">
-					You and your partner didn't both say "yes" to any of the same things. That's okay! Everyone has different preferences.
+					Ihr habt bei keiner Sache beide "Ja" gesagt. Das ist okay! Jeder hat andere Vorlieben.
 				</p>
-				<p class="text-gray-600">Consider reviewing your answers or having an open conversation about your desires.</p>
+				<p class="text-gray-600">Überleg dir, deine Antworten zu überprüfen oder ein offenes Gespräch über eure Wünsche zu führen.</p>
 			</div>
 			<button
 				onclick={updateAnswers}
 				class="w-full max-w-md mx-auto block bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
 			>
-				Update My Answers
+				Meine Antworten aktualisieren
 			</button>
 		</div>
 
@@ -94,10 +94,10 @@
 		<div class="text-center space-y-4">
 			<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100">
 				<h1 class="text-3xl font-bold mb-2 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-					Your Matches
+					Eure Übereinstimmungen
 				</h1>
 				<p class="text-gray-700">
-					You both said "yes" to {matches.length} thing{matches.length !== 1 ? 's' : ''}!
+					Ihr habt bei {matches.length} {matches.length === 1 ? 'Sache' : 'Sachen'} beide "Ja" gesagt!
 				</p>
 			</div>
 		</div>
@@ -109,7 +109,7 @@
 				</svg>
 				<div class="flex-1">
 					<p class="text-sm text-orange-800 font-semibold mb-2">
-						Share your code with your partner so they can see the results too!
+						Teile deinen Code mit deinem Partner, damit er die Ergebnisse auch sehen kann!
 					</p>
 					<ShareCode code={myCode} />
 				</div>
@@ -127,7 +127,7 @@
 				onclick={updateAnswers}
 				class="px-8 py-3 bg-white text-purple-600 font-semibold rounded-xl shadow-md border-2 border-purple-300 hover:border-purple-500 hover:shadow-lg transition-all duration-200"
 			>
-				Update My Answers
+				Meine Antworten aktualisieren
 			</button>
 		</div>
 
@@ -137,8 +137,8 @@
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 				</svg>
 				<div class="text-sm text-green-800">
-					<p class="font-semibold mb-1">What's next?</p>
-					<p>These are things you both expressed interest in! Have an open conversation and decide together what you'd like to explore.</p>
+					<p class="font-semibold mb-1">Was nun?</p>
+					<p>Das sind Dinge, für die ihr beide Interesse gezeigt habt! Führt ein offenes Gespräch und entscheidet gemeinsam, was ihr erkunden möchtet.</p>
 				</div>
 			</div>
 		</div>

@@ -1,32 +1,32 @@
 [
 	{
 		"id": "pi_001",
-		"category": "Physical Intimacy",
-		"text": "I enjoy trying new positions"
+		"category": "Koerperliche Intimitaet",
+		"text": "Ich probiere gerne neue Stellungen aus"
 	},
 	{
 		"id": "pi_002",
-		"category": "Physical Intimacy",
-		"text": "I like using massage oils or lotions"
+		"category": "Koerperliche Intimitaet",
+		"text": "Ich mag Massageoel oder -lotion beim Vorspiel"
 	},
 	{
 		"id": "rf_001",
-		"category": "Roleplay & Fantasy",
-		"text": "I enjoy roleplay scenarios"
+		"category": "Rollenspiel & Fantasie",
+		"text": "Ich mag Rollenspielszenarien"
 	},
 	{
 		"id": "rf_002",
-		"category": "Roleplay & Fantasy",
-		"text": "I like talking dirty"
+		"category": "Rollenspiel & Fantasie",
+		"text": "Schmutziges Reden macht mir Spass"
 	},
 	{
 		"id": "sa_001",
-		"category": "Settings & Atmosphere",
-		"text": "I enjoy intimate moments with candles or mood lighting"
+		"category": "Umgebung & Atmosphaere",
+		"text": "Ich geniesse intime Momente mit Kerzen oder Stimmungslicht"
 	},
 	{
 		"id": "ex_001",
-		"category": "Experimentation",
-		"text": "I want to explore using toys together"
+		"category": "Experimentieren",
+		"text": "Ich moechte gemeinsam Spielzeug ausprobieren"
 	}
 ]

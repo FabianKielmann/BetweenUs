@@ -11,8 +11,8 @@
 
 <div class="space-y-2">
 	<div class="flex justify-between text-sm text-gray-600">
-		<span>Question {questionNumber} of {total}</span>
-		<span>{current} answered • {Math.round(percentage)}%</span>
+		<span>Frage {questionNumber} von {total}</span>
+		<span>{current} beantwortet • {Math.round(percentage)}%</span>
 	</div>
 	<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
 		<div

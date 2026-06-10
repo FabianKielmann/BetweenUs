@@ -27,7 +27,7 @@
 				? 'bg-green-500 text-white shadow-lg scale-105'
 				: 'bg-green-100 text-green-700 hover:bg-green-200 hover:shadow-md'}"
 		>
-			Yes
+			Ja
 		</button>
 		<button
 			onclick={() => onAnswer('maybe')}
@@ -35,7 +35,7 @@
 				? 'bg-yellow-500 text-white shadow-lg scale-105'
 				: 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200 hover:shadow-md'}"
 		>
-			Maybe
+			Vielleicht
 		</button>
 		<button
 			onclick={() => onAnswer('no')}
@@ -43,7 +43,7 @@
 				? 'bg-red-500 text-white shadow-lg scale-105'
 				: 'bg-red-100 text-red-700 hover:bg-red-200 hover:shadow-md'}"
 		>
-			No
+			Nein
 		</button>
 	</div>
 </div>

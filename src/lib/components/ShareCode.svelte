@@ -27,7 +27,7 @@
 					setTimeout(() => { copied = false; }, 2000);
 				} catch (err) {
 					console.error('Fallback copy failed:', err);
-					alert('Copy failed. Please manually select and copy the code.');
+					alert('Kopieren fehlgeschlagen. Bitte den Code manuell auswählen und kopieren.');
 				} finally {
 					textArea.remove();
 				}
@@ -37,14 +37,14 @@
 			const input = document.querySelector('input[readonly]') as HTMLInputElement;
 			if (input) {
 				input.select();
-				alert('Please press Ctrl+C (or Cmd+C) to copy');
+				alert('Bitte Strg+C (oder Cmd+C) drücken, um zu kopieren');
 			}
 		}
 	}
 </script>
 
 <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100">
-	<h3 class="text-lg font-semibold mb-3 text-gray-800">Share this code with your partner</h3>
+	<h3 class="text-lg font-semibold mb-3 text-gray-800">Teile diesen Code mit deinem Partner</h3>
 	<div class="flex gap-3">
 		<input
 			type="text"
@@ -56,10 +56,10 @@
 			onclick={copyToClipboard}
 			class="px-6 py-3 {copied ? 'bg-green-500' : 'bg-purple-600'} text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200"
 		>
-			{copied ? '✓ Copied!' : 'Copy'}
+			{copied ? '✓ Kopiert!' : 'Kopieren'}
 		</button>
 	</div>
 	<p class="text-sm text-gray-600 mt-3">
-		They'll enter this code to answer the questions, then you'll both see your matches!
+		Dein Partner gibt diesen Code ein, um die Fragen zu beantworten – dann seht ihr beide eure Übereinstimmungen!
 	</p>
 </div>
