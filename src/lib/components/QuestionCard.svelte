@@ -1,5 +1,8 @@
 <script lang="ts">
 	import type { Question, ResponseType } from '$lib/types';
+	import { PUBLIC_PRIVACY_MODE } from '$env/static/public';
+
+	const privacyMode = PUBLIC_PRIVACY_MODE === 'true';
 
 	interface Props {
 		question: Question;
@@ -8,6 +11,14 @@
 	}
 
 	const { question, currentAnswer, onAnswer }: Props = $props();
+
+	let revealed = $state(false);
+
+	$effect(() => {
+		// Reset reveal when question changes
+		question;
+		revealed = false;
+	});
 </script>
 
 <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100">
@@ -15,7 +26,11 @@
 		<span class="text-sm font-medium text-purple-600 uppercase tracking-wide">
 			{question.category}
 		</span>
-		<h2 class="text-2xl font-semibold mt-2 text-gray-800">
+		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+		<h2
+			class="text-2xl font-semibold mt-2 text-gray-800 transition-[filter] duration-200 {privacyMode && !revealed ? 'blur-sm select-none cursor-pointer' : ''}"
+			ondblclick={() => { if (privacyMode) revealed = true; }}
+		>
 			{question.text}
 		</h2>
 	</div>

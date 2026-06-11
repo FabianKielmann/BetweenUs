@@ -17,6 +17,17 @@ npm run dev
 
 The app will be available at `http://localhost:5173` (or your network IP for remote access).
 
+### Discreet Mode
+
+When coding in public, you can blur question text so bystanders can't read it:
+
+```bash
+PUBLIC_PRIVACY_MODE=true npm run dev
+PUBLIC_PRIVACY_MODE=true npm run preview
+```
+
+Question text is blurred by default. Double-click the text to reveal a single question. The blur resets automatically when you advance to the next question.
+
 ## Editing Questions
 
 Questions are stored in `src/lib/data/questions.json`, which is **not committed to git** so you can keep your content private. To get started:
