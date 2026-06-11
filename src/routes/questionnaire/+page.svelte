@@ -22,6 +22,11 @@
 			return;
 		}
 		answers = session.answers.length > 0 ? session.answers : [];
+		if (session.answers.length > 0) {
+			const answeredIds = new Set(session.answers.map((a) => a.questionId));
+			const firstUnanswered = questions.findIndex((q) => !answeredIds.has(q.id));
+			currentIndex = firstUnanswered === -1 ? questions.length - 1 : firstUnanswered;
+		}
 		alreadyHasPartnerCode = !!loadPartnerCodeFromSession();
 	});
 
