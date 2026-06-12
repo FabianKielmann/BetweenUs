@@ -1,9 +1,14 @@
 # Changelog
 
-## [1.1.0-beta.1] - unreleased
+## [1.1.0-beta.2] - unreleased
 
 ### Added
 - Question overview panel: tap "Übersicht" on the questionnaire page to see all answers as a colour-coded dot grid (green/yellow/red/grey) and jump directly to any question
+
+## [1.0.1] - 2026-06-12
+
+### Fixed
+- 404 on direct navigation and page reload for non-root routes — disable SSR and add Apache `.htaccess` rewrite rules
 
 ## [1.0.0] - 2026-06-12
 
