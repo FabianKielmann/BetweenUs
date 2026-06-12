@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.0-beta.1] - unreleased
+
+### Added
+- Question overview panel: tap "Übersicht" on the questionnaire page to see all answers as a colour-coded dot grid (green/yellow/red/grey) and jump directly to any question
+
 ## [1.0.0] - 2026-06-12
 
 ### Added

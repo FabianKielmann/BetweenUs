@@ -60,6 +60,9 @@ cd build && zip -r /tmp/betweenus.zip .
 
 ### Git / GitHub
 - Use plain `git` commands. Never use the `gh` CLI.
+- New features: `feature/*` branch + pre-release version (`x.y.z-beta.1`) + pre-release GitHub tag while in development; merge to main + clean tag (`x.y.z`) + deploy when stable.
+- Bug fixes: `fix/*` branch + patch bump (`x.y.z`).
+- Always tag commits and push tags alongside the branch.
 
 ### No i18n
 - App is English-only. All strings are hardcoded in components.

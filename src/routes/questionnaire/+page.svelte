@@ -8,12 +8,14 @@
 	import { questions } from '$lib/data/questions';
 	import type { Answer, ResponseType } from '$lib/types';
 	import { loadSession, updateAnswers, generateShareCode, saveMyCode, savePartnerCodeToSession, loadPartnerCodeFromSession } from '$lib/utils/session';
+	import { categories } from '$lib/data/questions';
 
 	let currentIndex = $state(0);
 	let answers = $state<Answer[]>([]);
 	let shareCode = $state<string>('');
 	let isComplete = $state(false);
 	let alreadyHasPartnerCode = $state(false);
+	let showOverview = $state(false);
 
 	onMount(() => {
 		const session = loadSession();
@@ -71,6 +73,12 @@
 		if (currentIndex > 0) currentIndex--;
 	}
 
+	function jumpToQuestion(index: number) {
+		if (isComplete) isComplete = false;
+		currentIndex = index;
+		showOverview = false;
+	}
+
 	function goToResults() {
 		goto('/results');
 	}
@@ -78,10 +86,60 @@
 	const currentAnswer = $derived(
 		answers.find((a) => a.questionId === questions[currentIndex]?.id)?.response
 	);
+
+	const answerMap = $derived(new Map(answers.map((a) => [a.questionId, a.response])));
+
+	function badgeClasses(questionId: string): string {
+		const r = answerMap.get(questionId);
+		if (r === 'yes') return 'bg-green-100 text-green-700';
+		if (r === 'maybe') return 'bg-yellow-100 text-yellow-700';
+		if (r === 'no') return 'bg-red-100 text-red-700';
+		return 'bg-gray-100 text-gray-400';
+	}
+
+	function badgeLabel(questionId: string): string {
+		const r = answerMap.get(questionId);
+		if (r === 'yes') return 'Ja';
+		if (r === 'maybe') return 'Vielleicht';
+		if (r === 'no') return 'Nein';
+		return '–';
+	}
 </script>
 
 <div class="max-w-3xl mx-auto space-y-6">
-	{#if !isComplete}
+	{#if showOverview}
+		<div class="flex items-center justify-between">
+			<h2 class="font-semibold text-gray-800">Alle Fragen</h2>
+			<button
+				onclick={() => showOverview = false}
+				class="px-3 py-1.5 text-sm bg-white/80 border border-gray-200 rounded-lg text-gray-600 hover:bg-white hover:shadow-sm transition-all"
+			>
+				← Zurück zur Frage
+			</button>
+		</div>
+
+		<div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-pink-100 overflow-hidden">
+			{#each categories as category}
+				{@const catQuestions = questions.map((q, i) => ({ q, i })).filter(({ q }) => q.category === category)}
+				<div>
+					<p class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide bg-gray-50 border-b border-gray-100">
+						{category}
+					</p>
+					{#each catQuestions as { q, i }}
+						<button
+							onclick={() => jumpToQuestion(i)}
+							class="w-full flex items-center justify-between gap-3 px-4 py-3 text-left border-b border-gray-100 transition-colors {i === currentIndex ? 'bg-purple-50' : 'hover:bg-gray-50'}"
+						>
+							<span class="text-sm text-gray-800 flex-1">{q.text}</span>
+							<span class="text-xs font-medium px-2 py-0.5 rounded-full shrink-0 {badgeClasses(q.id)}">
+								{badgeLabel(q.id)}
+							</span>
+						</button>
+					{/each}
+				</div>
+			{/each}
+		</div>
+	{:else if !isComplete}
 		<ProgressBar current={answers.length} total={questions.length} questionNumber={currentIndex + 1} />
 
 		<QuestionCard
@@ -98,9 +156,12 @@
 			>
 				← Zurück
 			</button>
-			<span class="text-sm text-gray-600 self-center">
-				{answers.length} von {questions.length} beantwortet
-			</span>
+			<button
+				onclick={() => showOverview = true}
+				class="px-4 py-2 text-sm bg-white/80 border border-gray-200 rounded-lg text-gray-600 hover:bg-white hover:shadow-sm transition-all"
+			>
+				Übersicht
+			</button>
 		</div>
 	{:else}
 		<div class="space-y-6">
@@ -115,6 +176,12 @@
 						Tauscht jetzt Codes mit deinem Partner aus, um eure Übereinstimmungen zu sehen.
 					{/if}
 				</p>
+				<button
+					onclick={() => showOverview = true}
+					class="mt-4 px-4 py-2 text-sm bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-all"
+				>
+					Antworten überprüfen
+				</button>
 			</div>
 
 			<div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
