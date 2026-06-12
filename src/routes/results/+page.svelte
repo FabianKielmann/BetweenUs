@@ -14,6 +14,7 @@
 	let myCode = $state<string>('');
 	let partnerCode = $state<string>('');
 	let needsPartnerCode = $state(false);
+	let changingPartnerCode = $state(false);
 
 	onMount(() => {
 		const session = loadSession();
@@ -41,6 +42,7 @@
 		partnerCode = code;
 		savePartnerCodeToSession(code);
 		needsPartnerCode = false;
+		changingPartnerCode = false;
 		calculateMatches();
 	}
 
@@ -59,7 +61,25 @@
 				<p class="text-gray-700 mb-4">Gib den Code deines Partners ein, um eure gemeinsamen Übereinstimmungen zu sehen.</p>
 			</div>
 
-			<PartnerCodeInput onSuccess={handlePartnerCode} />
+			<div class="bg-blue-50 border border-blue-200 rounded-xl p-6 text-left">
+				<div class="flex gap-3">
+					<div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">1</div>
+					<div class="flex-1">
+						<h3 class="font-semibold text-blue-900 mb-2">Teile DEINEN Code mit deinem Partner</h3>
+						<ShareCode code={myCode} />
+					</div>
+				</div>
+			</div>
+
+			<div class="bg-purple-50 border border-purple-200 rounded-xl p-6 text-left">
+				<div class="flex gap-3">
+					<div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold">2</div>
+					<div class="flex-1">
+						<h3 class="font-semibold text-purple-900 mb-3">Gib den Code deines Partners ein</h3>
+						<PartnerCodeInput onSuccess={handlePartnerCode} />
+					</div>
+				</div>
+			</div>
 
 			<div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
 				<div class="flex gap-3">
@@ -88,6 +108,17 @@
 			>
 				Meine Antworten aktualisieren
 			</button>
+			<button
+				onclick={() => { changingPartnerCode = !changingPartnerCode; }}
+				class="w-full max-w-md mx-auto block bg-white text-gray-500 font-semibold py-3 px-8 rounded-xl border border-gray-200 hover:border-gray-400 hover:text-gray-700 transition-all duration-200 text-sm"
+			>
+				Partner-Code ändern
+			</button>
+			{#if changingPartnerCode}
+				<div class="w-full max-w-md mx-auto">
+					<PartnerCodeInput onSuccess={handlePartnerCode} />
+				</div>
+			{/if}
 		</div>
 
 	{:else}
@@ -122,14 +153,25 @@
 			{/each}
 		</div>
 
-		<div class="flex gap-4 justify-center pt-4">
+		<div class="flex gap-4 justify-center pt-4 flex-wrap">
 			<button
 				onclick={updateAnswers}
 				class="px-8 py-3 bg-white text-purple-600 font-semibold rounded-xl shadow-md border-2 border-purple-300 hover:border-purple-500 hover:shadow-lg transition-all duration-200"
 			>
 				Meine Antworten aktualisieren
 			</button>
+			<button
+				onclick={() => { changingPartnerCode = !changingPartnerCode; }}
+				class="px-8 py-3 bg-white text-gray-500 font-semibold rounded-xl shadow-md border-2 border-gray-200 hover:border-gray-400 hover:text-gray-700 transition-all duration-200"
+			>
+				Partner-Code ändern
+			</button>
 		</div>
+		{#if changingPartnerCode}
+			<div class="max-w-md mx-auto">
+				<PartnerCodeInput onSuccess={handlePartnerCode} />
+			</div>
+		{/if}
 
 		<div class="bg-green-50 border border-green-200 rounded-xl p-6">
 			<div class="flex gap-3">
