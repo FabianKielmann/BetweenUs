@@ -6,11 +6,13 @@
 	import { loadSession, loadMyCode, loadPartnerCodeFromSession, savePartnerCodeToSession } from '$lib/utils/session';
 	import { decodeShareCode } from '$lib/utils/encoding';
 	import PartnerCodeInput from '$lib/components/PartnerCodeInput.svelte';
-	import { findMatches, groupByCategory } from '$lib/utils/matching';
+	import { findMatches, findMaybeMatches, groupByCategory } from '$lib/utils/matching';
 	import type { MatchedQuestion } from '$lib/types';
 
 	let matches = $state<MatchedQuestion[]>([]);
 	let groupedMatches = $state<Map<string, MatchedQuestion[]>>(new Map());
+	let maybeMatches = $state<MatchedQuestion[]>([]);
+	let groupedMaybeMatches = $state<Map<string, MatchedQuestion[]>>(new Map());
 	let myCode = $state<string>('');
 	let partnerCode = $state<string>('');
 	let needsPartnerCode = $state(false);
@@ -35,6 +37,8 @@
 		if (myDecoded && partnerDecoded) {
 			matches = findMatches(myDecoded.a, partnerDecoded.a);
 			groupedMatches = groupByCategory(matches);
+			maybeMatches = findMaybeMatches(myDecoded.a, partnerDecoded.a);
+			groupedMaybeMatches = groupByCategory(maybeMatches);
 		}
 	}
 
@@ -102,6 +106,21 @@
 				</p>
 				<p class="text-gray-600">Überleg dir, deine Antworten zu überprüfen oder ein offenes Gespräch über eure Wünsche zu führen.</p>
 			</div>
+
+			{#if maybeMatches.length > 0}
+				<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-amber-200 text-left">
+					<h2 class="text-xl font-bold mb-1 text-amber-600">Vielleicht besprechen</h2>
+					<p class="text-sm text-gray-600 mb-4">
+						Bei {maybeMatches.length} {maybeMatches.length === 1 ? 'Frage' : 'Fragen'} hat mindestens einer von euch "Vielleicht" gesagt – eine gute Basis für ein offenes Gespräch.
+					</p>
+					<div class="space-y-4">
+						{#each Array.from(groupedMaybeMatches.entries()) as [category, categoryMatches]}
+							<CategorySection category={category} matches={categoryMatches} variant="maybe" />
+						{/each}
+					</div>
+				</div>
+			{/if}
+
 			<button
 				onclick={updateAnswers}
 				class="w-full max-w-md mx-auto block bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
@@ -152,6 +171,20 @@
 				<CategorySection category={category} matches={categoryMatches} />
 			{/each}
 		</div>
+
+		{#if maybeMatches.length > 0}
+			<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-amber-200">
+				<h2 class="text-xl font-bold mb-1 text-amber-600">Vielleicht besprechen</h2>
+				<p class="text-sm text-gray-600 mb-4">
+					Bei {maybeMatches.length} {maybeMatches.length === 1 ? 'Frage' : 'Fragen'} hat mindestens einer von euch "Vielleicht" gesagt – eine gute Basis für ein offenes Gespräch.
+				</p>
+				<div class="space-y-4">
+					{#each Array.from(groupedMaybeMatches.entries()) as [category, categoryMatches]}
+						<CategorySection category={category} matches={categoryMatches} variant="maybe" />
+					{/each}
+				</div>
+			</div>
+		{/if}
 
 		<div class="flex gap-4 justify-center pt-4 flex-wrap">
 			<button
