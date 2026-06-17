@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.0-beta.2] - unreleased
+
+### Fixed
+- Mobile layout: `ShareCode` and `PartnerCodeInput` no longer render nested card wrappers when used inside parent cards; input+button rows stack vertically on small screens
+
 ## [1.2.0-beta.1] - unreleased
 
 ### Added
