@@ -7,7 +7,7 @@
 	import PartnerCodeInput from '$lib/components/PartnerCodeInput.svelte';
 	import { questions } from '$lib/data/questions';
 	import type { Answer, ResponseType } from '$lib/types';
-	import { loadSession, updateAnswers, generateShareCode, saveMyCode, savePartnerCodeToSession, loadPartnerCodeFromSession } from '$lib/utils/session';
+	import { loadSession, updateAnswers, generateShareCode, saveMyCode, savePartnerCodeToSession, loadPartnerCodeFromSession, loadMyCode } from '$lib/utils/session';
 	import { categories } from '$lib/data/questions';
 
 	let currentIndex = $state(0);
@@ -16,6 +16,7 @@
 	let isComplete = $state(false);
 	let alreadyHasPartnerCode = $state(false);
 	let showOverview = $state(false);
+	let updatingExistingCode = $state(false);
 
 	onMount(() => {
 		const session = loadSession();
@@ -30,6 +31,7 @@
 			currentIndex = firstUnanswered === -1 ? questions.length - 1 : firstUnanswered;
 		}
 		alreadyHasPartnerCode = !!loadPartnerCodeFromSession();
+		updatingExistingCode = !!loadMyCode();
 	});
 
 	function handleAnswer(response: ResponseType) {
@@ -192,6 +194,17 @@
 					Antworten überprüfen
 				</button>
 			</div>
+
+			{#if updatingExistingCode}
+				<div class="bg-amber-50 border border-amber-300 rounded-xl p-4 flex gap-3">
+					<svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
+					</svg>
+					<p class="text-sm text-amber-800">
+						<span class="font-semibold">Neuer Code erzeugt.</span> Dein Partner muss diesen neuen Code eingeben – der alte ist nicht mehr gültig.
+					</p>
+				</div>
+			{/if}
 
 			<div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
 				<div class="flex gap-3 mb-4">
