@@ -5,6 +5,7 @@
 
 	const { code }: Props = $props();
 	let copied = $state(false);
+	let copiedLink = $state(false);
 
 	async function copyToClipboard() {
 		try {
@@ -41,6 +42,30 @@
 			}
 		}
 	}
+
+	async function copyLink() {
+		const link = `${window.location.origin}/join?code=${encodeURIComponent(code)}`;
+		try {
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				await navigator.clipboard.writeText(link);
+			} else {
+				const textArea = document.createElement('textarea');
+				textArea.value = link;
+				textArea.style.position = 'fixed';
+				textArea.style.left = '-999999px';
+				textArea.style.top = '-999999px';
+				document.body.appendChild(textArea);
+				textArea.focus();
+				textArea.select();
+				document.execCommand('copy');
+				textArea.remove();
+			}
+			copiedLink = true;
+			setTimeout(() => { copiedLink = false; }, 2000);
+		} catch (err) {
+			console.error('Failed to copy link:', err);
+		}
+	}
 </script>
 
 <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100">
@@ -57,6 +82,24 @@
 			class="px-6 py-3 {copied ? 'bg-green-500' : 'bg-purple-600'} text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200"
 		>
 			{copied ? '✓ Kopiert!' : 'Kopieren'}
+		</button>
+	</div>
+	<div class="mt-3">
+		<button
+			onclick={copyLink}
+			class="w-full flex items-center justify-center gap-2 px-4 py-2 {copiedLink ? 'bg-green-50 border-green-300 text-green-700' : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'} border rounded-lg text-sm font-medium transition-all duration-200"
+		>
+			{#if copiedLink}
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+				</svg>
+				Link kopiert!
+			{:else}
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+				</svg>
+				Link kopieren
+			{/if}
 		</button>
 	</div>
 	<p class="text-sm text-gray-600 mt-3">
