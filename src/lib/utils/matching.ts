@@ -23,6 +23,33 @@ export function findMatches(userAnswers: Answer[], partnerAnswers: Answer[]): Ma
 	return matches;
 }
 
+export function findMaybeMatches(userAnswers: Answer[], partnerAnswers: Answer[]): MatchedQuestion[] {
+	const matches: MatchedQuestion[] = [];
+
+	for (const userAnswer of userAnswers) {
+		const partnerAnswer = partnerAnswers.find((a) => a.questionId === userAnswer.questionId);
+		if (!partnerAnswer) continue;
+
+		const bothNotNo =
+			userAnswer.response !== 'no' && partnerAnswer.response !== 'no';
+		const atLeastOneMaybe =
+			userAnswer.response === 'maybe' || partnerAnswer.response === 'maybe';
+
+		if (bothNotNo && atLeastOneMaybe) {
+			const question = questions.find((q) => q.id === userAnswer.questionId);
+			if (question) {
+				matches.push({
+					...question,
+					userAnswer: userAnswer.response,
+					partnerAnswer: partnerAnswer.response
+				});
+			}
+		}
+	}
+
+	return matches;
+}
+
 export function groupByCategory(matches: MatchedQuestion[]): Map<string, MatchedQuestion[]> {
 	const grouped = new Map<string, MatchedQuestion[]>();
 
