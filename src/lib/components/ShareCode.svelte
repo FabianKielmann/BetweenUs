@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import QRCode from 'qrcode';
+
 	interface Props {
 		code: string;
 	}
@@ -6,6 +9,19 @@
 	const { code }: Props = $props();
 	let copied = $state(false);
 	let copiedLink = $state(false);
+	let canvasEl = $state<HTMLCanvasElement | null>(null);
+	let mounted = $state(false);
+
+	onMount(() => {
+		mounted = true;
+	});
+
+	$effect(() => {
+		if (mounted && canvasEl) {
+			const joinUrl = `${window.location.origin}/join?code=${encodeURIComponent(code)}`;
+			QRCode.toCanvas(canvasEl, joinUrl, { width: 200, margin: 2 });
+		}
+	});
 
 	async function copyToClipboard() {
 		try {
@@ -102,6 +118,14 @@
 			{/if}
 		</button>
 	</div>
+
+	{#if mounted}
+		<div class="mt-4 flex flex-col items-center gap-2">
+			<p class="text-xs text-gray-500">oder QR-Code scannen</p>
+			<canvas bind:this={canvasEl} class="rounded-lg"></canvas>
+		</div>
+	{/if}
+
 	<p class="text-sm text-gray-600 mt-3">
 		Dein Partner gibt diesen Code ein, um die Fragen zu beantworten – dann seht ihr beide eure Übereinstimmungen!
 	</p>
