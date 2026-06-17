@@ -4,9 +4,10 @@
 
 	interface Props {
 		code: string;
+		standalone?: boolean;
 	}
 
-	const { code }: Props = $props();
+	const { code, standalone = true }: Props = $props();
 	let copied = $state(false);
 	let copiedLink = $state(false);
 	let canvasEl = $state<HTMLCanvasElement | null>(null);
@@ -84,18 +85,20 @@
 	}
 </script>
 
-<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100">
-	<h3 class="text-lg font-semibold mb-3 text-gray-800">Teile diesen Code mit deinem Partner</h3>
-	<div class="flex gap-3">
+<div class={standalone ? 'bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100' : ''}>
+	{#if standalone}
+		<h3 class="text-lg font-semibold mb-3 text-gray-800">Teile diesen Code mit deinem Partner</h3>
+	{/if}
+	<div class="flex flex-col sm:flex-row gap-2 min-w-0">
 		<input
 			type="text"
 			readonly
 			value={code}
-			class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg font-mono text-sm"
+			class="min-w-0 flex-1 px-3 py-3 bg-gray-50 border border-gray-300 rounded-lg font-mono text-sm truncate"
 		/>
 		<button
 			onclick={copyToClipboard}
-			class="px-6 py-3 {copied ? 'bg-green-500' : 'bg-purple-600'} text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200"
+			class="w-full sm:w-auto px-4 py-3 {copied ? 'bg-green-500' : 'bg-purple-600'} text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200"
 		>
 			{copied ? '✓ Kopiert!' : 'Kopieren'}
 		</button>
@@ -126,7 +129,9 @@
 		</div>
 	{/if}
 
-	<p class="text-sm text-gray-600 mt-3">
-		Dein Partner gibt diesen Code ein, um die Fragen zu beantworten – dann seht ihr beide eure Übereinstimmungen!
-	</p>
+	{#if standalone}
+		<p class="text-sm text-gray-600 mt-3">
+			Dein Partner gibt diesen Code ein, um die Fragen zu beantworten – dann seht ihr beide eure Übereinstimmungen!
+		</p>
+	{/if}
 </div>

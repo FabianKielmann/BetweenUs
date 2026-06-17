@@ -207,26 +207,22 @@
 			{/if}
 
 			<div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
-				<div class="flex gap-3 mb-4">
+				<div class="flex items-center gap-3 mb-3">
 					<div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
 						{#if alreadyHasPartnerCode}✓{:else}1{/if}
 					</div>
-					<div class="flex-1">
-						<h3 class="font-semibold text-blue-900 mb-2">Teile DEINEN Code mit deinem Partner</h3>
-						<ShareCode code={shareCode} />
-					</div>
+					<h3 class="font-semibold text-blue-900">Teile DEINEN Code mit deinem Partner</h3>
 				</div>
+				<ShareCode code={shareCode} standalone={false} />
 			</div>
 
 			{#if !alreadyHasPartnerCode}
 				<div class="bg-purple-50 border border-purple-200 rounded-xl p-6">
-					<div class="flex gap-3">
+					<div class="flex items-center gap-3 mb-3">
 						<div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold">2</div>
-						<div class="flex-1">
-							<h3 class="font-semibold text-purple-900 mb-3">Hol dir den Code deines Partners und gib ihn unten ein</h3>
-							<PartnerCodeInput onSuccess={handlePartnerCode} />
-						</div>
+						<h3 class="font-semibold text-purple-900">Hol dir den Code deines Partners und gib ihn unten ein</h3>
 					</div>
+					<PartnerCodeInput onSuccess={handlePartnerCode} standalone={false} />
 				</div>
 
 				<div class="text-center">
