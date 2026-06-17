@@ -89,6 +89,10 @@
 
 	const answerMap = $derived(new Map(answers.map((a) => [a.questionId, a.response])));
 
+	const yesCount = $derived(answers.filter((a) => a.response === 'yes').length);
+	const maybeCount = $derived(answers.filter((a) => a.response === 'maybe').length);
+	const noCount = $derived(answers.filter((a) => a.response === 'no').length);
+
 	function badgeClasses(questionId: string): string {
 		const r = answerMap.get(questionId);
 		if (r === 'yes') return 'bg-green-100 text-green-700';
@@ -176,6 +180,11 @@
 						Tauscht jetzt Codes mit deinem Partner aus, um eure Übereinstimmungen zu sehen.
 					{/if}
 				</p>
+				<div class="flex justify-center gap-4 mt-4 text-sm">
+					<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full font-medium">{yesCount}× Ja</span>
+					<span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full font-medium">{maybeCount}× Vielleicht</span>
+					<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full font-medium">{noCount}× Nein</span>
+				</div>
 				<button
 					onclick={() => showOverview = true}
 					class="mt-4 px-4 py-2 text-sm bg-white border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-all"
