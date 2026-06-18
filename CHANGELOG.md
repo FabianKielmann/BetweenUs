@@ -1,16 +1,6 @@
 # Changelog
 
-## [1.2.0-beta.3] - unreleased
-
-### Fixed
-- Joining with a partner code when the user already has answers now skips the questionnaire and goes directly to results
-
-## [1.2.0-beta.2] - unreleased
-
-### Fixed
-- Mobile layout: `ShareCode` and `PartnerCodeInput` no longer render nested card wrappers when used inside parent cards; input+button rows stack vertically on small screens
-
-## [1.2.0-beta.1] - unreleased
+## [1.2.0] - 2026-06-18
 
 ### Added
 - "Vielleicht besprechen" section in results: pairs where at least one partner answered "Vielleicht" (and neither said "Nein") appear in a second amber-styled section below the mutual-yes matches
@@ -24,6 +14,8 @@
 
 ### Fixed
 - `html lang` attribute corrected from `"en"` to `"de"` to match the German UI
+- Mobile layout: `ShareCode` and `PartnerCodeInput` no longer render nested card wrappers when used inside parent cards; input+button rows stack vertically on small screens
+- Joining with a partner code when the user already has answers now skips the questionnaire and goes directly to results
 
 ## [1.1.0-beta.2] - unreleased
 
