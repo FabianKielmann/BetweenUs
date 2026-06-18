@@ -4,9 +4,10 @@
 
 	interface Props {
 		onSuccess: (code: string) => void;
+		standalone?: boolean;
 	}
 
-	const { onSuccess }: Props = $props();
+	const { onSuccess, standalone = true }: Props = $props();
 	let code = $state('');
 	let error = $state('');
 
@@ -34,10 +35,12 @@
 	}
 </script>
 
-<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100">
-	<h3 class="text-lg font-semibold mb-3 text-gray-800">Gib den Code deines Partners ein</h3>
+<div class={standalone ? 'bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100' : ''}>
+	{#if standalone}
+		<h3 class="text-lg font-semibold mb-3 text-gray-800">Gib den Code deines Partners ein</h3>
+	{/if}
 	<form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="space-y-4">
-		<div class="flex gap-3">
+		<div class="flex flex-col sm:flex-row gap-2">
 			<input
 				type="text"
 				bind:value={code}
@@ -47,7 +50,7 @@
 			/>
 			<button
 				type="submit"
-				class="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200"
+				class="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200"
 			>
 				Bestätigen
 			</button>

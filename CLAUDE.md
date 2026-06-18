@@ -60,6 +60,13 @@ cd build && zip -r /tmp/betweenus.zip .
 
 ### Git / GitHub
 - Use plain `git` commands. Never use the `gh` CLI.
+- **Branching strategy:**
+  - `main` — stable releases only, always deployed
+  - `dev` — next release in progress; always reflects what will become the next version
+  - `feature/*` — individual features branched off `dev`, merged back into `dev` when ready
+  - `fix/*` — bug fixes; branch off `main` for hotfixes, off `dev` for pre-release fixes
+- **Versioning:** `dev` carries a pre-release version (e.g. `1.1.0-beta.1`). When `dev` is ready to release, merge to `main`, bump to clean semver (`1.1.0`), tag, deploy.
+- Always push tags alongside branches.
 
 ### No i18n
 - App is English-only. All strings are hardcoded in components.

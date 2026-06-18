@@ -1,10 +1,20 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 	import { decodeShareCode } from '$lib/utils/encoding';
-	import { createSession, savePartnerData, savePartnerCodeToSession } from '$lib/utils/session';
+	import { createSession, loadSession, savePartnerData, savePartnerCodeToSession } from '$lib/utils/session';
 
 	let code = $state('');
 	let error = $state('');
+
+	onMount(() => {
+		const urlCode = page.url.searchParams.get('code');
+		if (urlCode) {
+			code = urlCode;
+			handleSubmit();
+		}
+	});
 
 	function handleSubmit() {
 		error = '';
@@ -21,9 +31,16 @@
 		}
 
 		savePartnerData(decoded);
-		createSession();
-		savePartnerCodeToSession(code.trim());
-		goto('/questionnaire');
+
+		const existing = loadSession();
+		if (existing && existing.answers.length > 0) {
+			savePartnerCodeToSession(code.trim());
+			goto('/results');
+		} else {
+			createSession();
+			savePartnerCodeToSession(code.trim());
+			goto('/questionnaire');
+		}
 	}
 </script>
 
