@@ -32,12 +32,12 @@
 	});
 
 	function calculateMatches() {
-		const myDecoded = decodeShareCode(myCode);
+		const session = loadSession();
 		const partnerDecoded = decodeShareCode(partnerCode);
-		if (myDecoded && partnerDecoded) {
-			matches = findMatches(myDecoded.a, partnerDecoded.a);
+		if (session && partnerDecoded) {
+			matches = findMatches(session.answers, partnerDecoded.a);
 			groupedMatches = groupByCategory(matches);
-			maybeMatches = findMaybeMatches(myDecoded.a, partnerDecoded.a);
+			maybeMatches = findMaybeMatches(session.answers, partnerDecoded.a);
 			groupedMaybeMatches = groupByCategory(maybeMatches);
 		}
 	}

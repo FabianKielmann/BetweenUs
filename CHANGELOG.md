@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.0-beta.3] - unreleased
+
+### Fixed
+- Joining with a partner code when the user already has answers now skips the questionnaire and goes directly to results
+
 ## [1.2.0-beta.2] - unreleased
 
 ### Fixed
