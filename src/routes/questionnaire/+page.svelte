@@ -9,6 +9,9 @@
 	import type { Answer, ResponseType } from '$lib/types';
 	import { loadSession, updateAnswers, generateShareCode, saveMyCode, savePartnerCodeToSession, loadPartnerCodeFromSession, loadMyCode } from '$lib/utils/session';
 	import { categories } from '$lib/data/questions';
+	import { PUBLIC_PRIVACY_MODE } from '$env/static/public';
+
+	const privacyMode = PUBLIC_PRIVACY_MODE === 'true';
 
 	let currentIndex = $state(0);
 	let answers = $state<Answer[]>([]);
@@ -136,7 +139,7 @@
 							onclick={() => jumpToQuestion(i)}
 							class="w-full flex items-center justify-between gap-3 px-4 py-3 text-left border-b border-gray-100 transition-colors {i === currentIndex ? 'bg-purple-50' : 'hover:bg-gray-50'}"
 						>
-							<span class="text-sm text-gray-800 flex-1">{q.text}</span>
+							<span class="text-sm text-gray-800 flex-1 transition-[filter] duration-200 {privacyMode ? 'blur-sm select-none' : ''}">{q.text}</span>
 							<span class="text-xs font-medium px-2 py-0.5 rounded-full shrink-0 {badgeClasses(q.id)}">
 								{badgeLabel(q.id)}
 							</span>
