@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.1-beta.1] - unreleased
+
+### Fixed
+- Privacy mode blur now also applies to question text in the questionnaire overview panel
+
 ## [1.2.0] - 2026-06-18
 
 ### Added
