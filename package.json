@@ -1,12 +1,12 @@
 {
 	"name": "betweenus",
 	"private": true,
-	"version": "1.2.0",
+	"version": "2.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
+		"preview": "node build/index.js",
 		"clean": "rm -rf .svelte-kit build node_modules/.vite",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -14,15 +14,13 @@
 		"format": "prettier --write src"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.1",
-		"@sveltejs/adapter-static": "^3.0.10",
+		"@sveltejs/adapter-node": "^5.2.10",
 		"@sveltejs/kit": "^2.63.0",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
-		"@tailwindcss/postcss": "^4.3.0",
 		"@tailwindcss/vite": "^4.3.0",
+		"@types/better-sqlite3": "^7.6.11",
 		"@types/node": "^25.9.2",
-		"@types/qrcode": "^1.5.6",
-		"@types/uuid": "^10.0.0",
+		"@types/web-push": "^3.6.3",
 		"autoprefixer": "^10.5.0",
 		"postcss": "^8.5.15",
 		"prettier": "^3.8.4",
@@ -31,11 +29,10 @@
 		"svelte-check": "^4.6.0",
 		"tailwindcss": "^4.3.0",
 		"typescript": "^6.0.3",
-		"vite": "^8.0.16",
-		"vite-plugin-pwa": "^1.3.0"
+		"vite": "^8.0.16"
 	},
 	"dependencies": {
-		"qrcode": "^1.5.4",
-		"uuid": "^14.0.0"
+		"better-sqlite3": "^9.6.0",
+		"web-push": "^3.6.7"
 	}
 }

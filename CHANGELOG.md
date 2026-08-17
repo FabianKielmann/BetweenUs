@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.1.0] - 2026-08-17
+
+### Added
+- Word-pair share codes (e.g. `bright-ocean`) replace raw UUIDs as the user-facing partner code — over 1 million unique combinations
+- First-visit onboarding tutorial: three-step overlay explaining the app concept, the share code, and how to back up the account
+- Account recovery link: a secret URL (`/recover/<uuid>`) that restores a session on a new device, accessible from settings and the onboarding
+- "Konto sichern" section in settings: shows the backup link with a copy button and a visible URL for manual copying
+
+### Fixed
+- Matches were visible to a user who guessed a partner's code, even if the partner never connected back — matches now require a mutual connection from both sides
+- Pointer cursor missing on all interactive buttons
+
+## [1.2.1-beta.1] - unreleased
+
+### Fixed
+- Privacy mode blur now also applies to question text in the questionnaire overview panel
+
 ## [1.2.0] - 2026-06-18
 
 ### Added
