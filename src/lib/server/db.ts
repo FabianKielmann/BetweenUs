@@ -52,6 +52,10 @@ db.exec(`
 	);
 `);
 
+try { db.exec('ALTER TABLE users ADD COLUMN share_code TEXT'); } catch { /* already exists */ }
+db.exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_share_code ON users(share_code)');
+try { db.exec('ALTER TABLE users ADD COLUMN onboarding_done INTEGER NOT NULL DEFAULT 0'); } catch { /* already exists */ }
+
 const upsertQuestion = db.prepare(
 	'INSERT OR IGNORE INTO questions (id, category, text) VALUES (?, ?, ?)'
 );

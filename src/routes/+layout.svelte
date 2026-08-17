@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
+	import Onboarding from '$lib/components/Onboarding.svelte';
 
 	const { data, children } = $props();
 
@@ -33,6 +34,10 @@
 		{ href: '/einstellungen', label: 'Einstellungen', icon: 'settings' }
 	];
 </script>
+
+{#if data.showOnboarding}
+	<Onboarding shareCode={data.shareCode} userId={data.userId} />
+{/if}
 
 <div class="min-h-screen flex flex-col bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 pb-16 sm:pb-0">
 	<header class="bg-white/80 backdrop-blur-sm border-b border-pink-200 sticky top-0 z-10">

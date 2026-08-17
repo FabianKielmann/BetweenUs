@@ -13,7 +13,15 @@
 		</h1>
 	</div>
 
-	{#if !data.hasPartner}
+	{#if !data.hasPartner || data.partnerNotConnected}
+		{#if data.partnerNotConnected}
+			<div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 text-center space-y-3">
+				<p class="text-yellow-800 font-medium">Warte auf deinen Partner</p>
+				<p class="text-yellow-700 text-sm">
+					Du bist verbunden, aber dein Partner hat sich noch nicht mit dir verbunden. Sobald er deinen Code eingibt, werden eure Matches hier angezeigt.
+				</p>
+			</div>
+		{:else}
 		<div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 text-center space-y-3">
 			<p class="text-blue-800 font-medium">Noch kein Partner verbunden</p>
 			<p class="text-blue-700 text-sm">
@@ -26,6 +34,7 @@
 				Zu den Einstellungen
 			</a>
 		</div>
+		{/if}
 	{:else if data.matches.length === 0 && data.maybeMatches.length === 0}
 		<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-pink-100 text-center space-y-4">
 			<div class="text-5xl">💬</div>

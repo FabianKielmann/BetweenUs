@@ -13,7 +13,15 @@ export const load: PageServerLoad = async ({ locals }) => {
 		.get(userId) as { partner_id: string } | undefined;
 
 	if (!partner) {
-		return { hasPartner: false, matches: [], maybeMatches: [], groupedMatches: [], groupedMaybeMatches: [] };
+		return { hasPartner: false, partnerNotConnected: false, matches: [], maybeMatches: [], groupedMatches: [], groupedMaybeMatches: [] };
+	}
+
+	const reverseConnection = db
+		.prepare('SELECT 1 FROM partner_connections WHERE user_id = ? AND partner_id = ?')
+		.get(partner.partner_id, userId);
+
+	if (!reverseConnection) {
+		return { hasPartner: true, partnerNotConnected: true, matches: [], maybeMatches: [], groupedMatches: [], groupedMaybeMatches: [] };
 	}
 
 	const matches = db
@@ -46,6 +54,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 	return {
 		hasPartner: true,
+		partnerNotConnected: false,
 		matches,
 		maybeMatches,
 		groupedMatches,

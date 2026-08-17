@@ -7,13 +7,25 @@
 	const { data }: { data: PageData } = $props();
 
 	let copied = $state(false);
+	let copiedRecovery = $state(false);
 	let connectError = $state('');
 	let pushLoading = $state(false);
+	let showRecovery = $state(false);
 
-	function copyUserId() {
-		navigator.clipboard.writeText(data.userId);
+	function copyShareCode() {
+		navigator.clipboard.writeText(data.shareCode);
 		copied = true;
 		setTimeout(() => (copied = false), 2000);
+	}
+
+	async function copyRecoveryLink() {
+		try {
+			await navigator.clipboard.writeText(`${window.location.origin}/recover/${data.userId}`);
+			copiedRecovery = true;
+			setTimeout(() => (copiedRecovery = false), 2000);
+		} catch {
+			// Clipboard API not available on HTTP (non-localhost)
+		}
 	}
 
 	function urlBase64ToUint8Array(base64String: string): Uint8Array<ArrayBuffer> {
@@ -79,11 +91,11 @@
 			<input
 				type="text"
 				readonly
-				value={data.userId}
-				class="flex-1 font-mono text-sm bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-700 select-all"
+				value={data.shareCode}
+				class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-700 select-all text-base"
 			/>
 			<button
-				onclick={copyUserId}
+				onclick={copyShareCode}
 				class="px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 {copied
 					? 'bg-green-500 text-white'
 					: 'bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-md'}"
@@ -97,7 +109,7 @@
 	<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100 space-y-4">
 		<h2 class="text-lg font-semibold text-gray-800">Partner</h2>
 
-		{#if data.partnerId}
+		{#if data.hasPartner}
 			<div class="space-y-3">
 				<div class="flex items-center gap-2 text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
 					<svg class="size-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -105,7 +117,9 @@
 					</svg>
 					Verbunden
 				</div>
-				<p class="font-mono text-xs text-gray-500 break-all">{data.partnerId}</p>
+				{#if data.partnerShareCode}
+					<p class="text-sm text-gray-500">Code deines Partners: <span class="font-medium text-gray-700">{data.partnerShareCode}</span></p>
+				{/if}
 				<form method="POST" action="?/disconnectPartner" use:enhance>
 					<button
 						type="submit"
@@ -137,9 +151,9 @@
 				<div class="flex flex-col sm:flex-row gap-2">
 					<input
 						type="text"
-						name="partnerId"
-						placeholder="Partner-Code eingeben"
-						class="flex-1 font-mono text-sm bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-300"
+						name="partnerCode"
+						placeholder="z.B. bright-ocean"
+						class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-300 text-base"
 					/>
 					<button
 						type="submit"
@@ -152,6 +166,42 @@
 					<p class="text-sm text-red-600">{connectError}</p>
 				{/if}
 			</form>
+		{/if}
+	</div>
+
+	<!-- Recovery link -->
+	<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-pink-100 space-y-4">
+		<button
+			onclick={() => (showRecovery = !showRecovery)}
+			class="flex items-center justify-between w-full text-left"
+		>
+			<h2 class="text-lg font-semibold text-gray-800">Konto sichern</h2>
+			<svg
+				class="size-5 text-gray-400 transition-transform duration-200 {showRecovery ? 'rotate-180' : ''}"
+				fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+			>
+				<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+			</svg>
+		</button>
+
+		{#if showRecovery}
+			<p class="text-sm text-gray-600">
+				Speichere diesen Link als Lesezeichen oder Screenshot. Falls du ein neues Gerät benutzt und dein Konto verlierst, kannst du diesen Link öffnen, um deine Daten wiederherzustellen.
+			</p>
+			<p class="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+				Teile diesen Link nicht mit anderen — er gibt Zugriff auf dein Konto.
+			</p>
+			<div class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 break-all text-xs text-gray-600 select-all">
+				{window.location.origin}/recover/{data.userId}
+			</div>
+			<button
+				onclick={copyRecoveryLink}
+				class="w-full py-2.5 rounded-lg font-medium text-sm transition-all duration-200 {copiedRecovery
+					? 'bg-green-500 text-white'
+					: 'bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-md'}"
+			>
+				{copiedRecovery ? 'Link kopiert!' : 'Link kopieren'}
+			</button>
 		{/if}
 	</div>
 

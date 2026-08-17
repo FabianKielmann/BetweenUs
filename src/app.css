@@ -4,3 +4,7 @@
 	--color-primary: #ec4899;
 	--color-secondary: #8b5cf6;
 }
+
+button {
+	cursor: pointer;
+}
