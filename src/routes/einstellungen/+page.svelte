@@ -87,7 +87,7 @@
 		<p class="text-sm text-gray-600">
 			Teile diesen Code mit deinem Partner, damit er sich mit dir verbinden kann.
 		</p>
-		<div class="flex gap-2">
+		<div class="flex flex-col sm:flex-row gap-2">
 			<input
 				type="text"
 				readonly

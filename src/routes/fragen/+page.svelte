@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { invalidateAll } from '$app/navigation';
 	import QuestionCard from '$lib/components/QuestionCard.svelte';
-	import ProgressBar from '$lib/components/ProgressBar.svelte';
 	import type { PageData } from './$types';
 	import type { ResponseType } from '$lib/types';
 
@@ -22,9 +21,7 @@
 </script>
 
 <div class="max-w-2xl mx-auto space-y-6">
-	<ProgressBar current={data.answered} total={data.total} />
-
-	{#if data.question}
+{#if data.question}
 		<div class:opacity-50={submitting} class:pointer-events-none={submitting}>
 			<QuestionCard question={data.question} onAnswer={handleAnswer} />
 		</div>

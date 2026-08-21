@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.1] - 2026-08-21
+
+### Changed
+- Removed progress bar from the questionnaire view
+- Share code input and copy button now stack vertically on small screens
+
 ## [2.1.0] - 2026-08-17
 
 ### Added
